@@ -1,58 +1,58 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 600,
-  "height": 600,
-  "title": "Relationship Between Income Per Person and Internetuserate and Urbanrate",
+  "width": 730,
+  "height": 400,
+  "title": "Relatedness vs Continent Complexity ",
   "data": {
-    "url": "https://raw.githubusercontent.com/Aurora0815/Homework10/main/gapminder_internet.csv"
+    "url": "https://raw.githubusercontent.com/Aurora0815/Project2/main/Bubble-Relatedness.csv"
   },
   "params": [
     {
-      "name": "urbanrate_Above",
+      "name": "Relatedness",
       "value": 0,
       "bind": {
         "input": "range",
         "min": 0,
-        "max": 100,
-        "step": 10,
-        "name": "Minimum urbanrate: "
+        "max": 0.4,
+        "step": 0.05,
+        "name": "Relatedness: "
       }
     }
   ],
-  "transform": [{"filter": "datum.urbanrate > urbanrate_Above"}],
+  "transform": [{"filter": "datum.Relatedness > Relatedness"}],
   "encoding": {
     "x": {
-      "field": "urbanrate",
+      "field": "Relatedness",
       "type": "quantitative",
-      "title": "urbanrate(%)"
+      "title": "Relatedness"
     },
     "y": {
-      "field": "internetuserate",
+      "field": "Trade Value ECI",
       "type": "quantitative",
-      "title": "internetuserate",
+      "title": "Country Complexity",
       "axis": {"tickCount": 9},
-      "scale": {"domain": [1, 100]}
+      "scale": {"domain": [-2, 2.5]}
     }
   },
   "layer": [
     {
       "mark": "circle",
       "encoding": {
-        "color": {"field": "country", "type": "nominal"},
+        "color": {"field": "Continent", "type": "nominal"},
         "size": {
-          "field": "incomeperperson",
+          "field": "Trade Value ECI",
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-            "domain": [0, 5000, 10000, 20000, 50000],
+            "domain": [0, 0.2, 0.4, 0.6, 0.8, 1],
             "range": [20, 50, 150, 200, 300, 400]
           }
         },
         "tooltip": [
-          {"field": "country", "type": "nominal"},
-          {"field": "incomeperperson", "type": "quantitative", "format": ","},
-          {"field": "urbanrate", "type": "quantitative"},
-          {"field": "internetuserate", "type": "quantitative"}
+          {"field": "Continent", "type": "nominal"},
+          {"field": "Trade Value ECI", "type": "quantitative", "format": ","},
+          {"field": "Relatedness", "type": "quantitative"},
+          {"field": "RCA", "type": "quantitative"}
         ]
       }
     },
@@ -66,7 +66,7 @@
         "fontStyle": "italic"
       },
       "encoding": {
-        "text": {"field": "country", "type": "nominal"},
+        "text": {"field": "Continent", "type": "nominal"},
         "color": {"value": "black"},
         "opacity": {
           "condition": {
@@ -76,10 +76,10 @@
           "value": 0
         },
         "tooltip": [
-          {"field": "country", "type": "nominal"},
-          {"field": "incomeperperson", "type": "quantitative", "format": ","},
-          {"field": "urbanrate", "type": "quantitative"},
-          {"field": "internetuserate", "type": "quantitative"}
+          {"field": "Continent", "type": "nominal"},
+          {"field": "Trade Value ECI", "type": "quantitative", "format": ","},
+          {"field": "Relatedness", "type": "quantitative"},
+          {"field": "RCA", "type": "quantitative"}
         ]
       }
     }
